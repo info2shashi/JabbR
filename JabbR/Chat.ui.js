@@ -79,7 +79,8 @@
         roomLoadingTimeout = null,
         Room = chat.Room,
         $unreadNotificationCount = null,
-        $splashScreen = null;
+        $splashScreen = null,
+        roomCreationDeferreds = {};
 
     function getRoomNameFromHash(hash) {
         if (hash.length && hash[0] === '/') {
@@ -368,6 +369,10 @@
             roomOwnersHeader = utility.getLanguageResource('Chat_UserOwnerHeader'),
             usersHeader = utility.getLanguageResource('Chat_UserHeader'),
             $tabsDropdown = $tabs.last();
+        
+        if (roomCreationDeferreds[roomName] == null) {
+            roomCreationDeferreds[roomName] = jQuery.Deferred();
+        }
 
         if (room.exists()) {
             return false;
@@ -439,6 +444,9 @@
         setAccessKeys();
 
         lobbyLoaded = false;
+        
+        // resolve the deferred
+        roomCreationDeferreds[roomName].resolve();
         return true;
     }
 
@@ -458,6 +466,11 @@
             setAccessKeys();
             
             ui.updateTabOverflow();
+        }
+        
+        // reject the deferred if it's waiting
+        if (roomCreationDeferreds[roomName] != null && roomCreationDeferreds[roomName].state() == 'pending') {
+            roomCreationDeferreds[roomName].reject();
         }
     }
 
@@ -2356,6 +2369,13 @@
         },
         hideSplashScreen: function () {
             $splashScreen.fadeOut('slow');
+        },
+        getRoomLoadPromise: function (roomName) {
+            if (roomCreationDeferreds[roomName] == null) {
+                roomCreationDeferreds[roomName] = jQuery.Deferred();
+            }
+
+            return roomCreationDeferreds[roomName].promise();
         }
     };
 

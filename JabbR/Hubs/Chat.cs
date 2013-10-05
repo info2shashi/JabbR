@@ -589,6 +589,8 @@ namespace JabbR
                 // Add the caller to the group so they receive messages
                 Groups.Add(clientId, room.Name);
 
+                Thread.Sleep(5000);
+
                 if (!reconnecting)
                 {
                     // Add to the list of room names

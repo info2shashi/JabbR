@@ -4,6 +4,10 @@
 /// <reference path="Chat.ui.js" />
 /// <reference path="Scripts/moment.min.js" />
 
+function getRoomLoadPromise(room) {
+    return 
+}
+
 (function ($, connection, window, ui, utility) {
     "use strict";
 
@@ -488,9 +492,11 @@
     };
 
     chat.client.addMessage = function (message, room) {
+        ui.getRoomLoadPromise(room).done(function () {
+            
         var viewModel = getMessageViewModel(message);
 
-        scrollIfNecessary(function () {
+        scrollIfNecessary(function() {
             // Update your message when it comes from the server
             if (ui.messageExists(viewModel.id)) {
                 ui.replaceMessage(viewModel);
@@ -502,6 +508,8 @@
         var isMentioned = viewModel.highlight === 'highlight';
 
         updateUnread(room, isMentioned);
+            
+        });
     };
 
     chat.client.addUser = function (user, room, isOwner) {
