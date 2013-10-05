@@ -321,10 +321,10 @@ namespace JabbR.Services
                 throw new HubException(LanguageResources.RoomCannotBeNamedLobby);
             }
 
-            if (!IsValidRoomName(name))
-            {
-                throw new HubException(String.Format(LanguageResources.RoomInvalidName, name));
-            }
+            //if (!IsValidRoomName(name))
+            //{
+            //    throw new HubException(String.Format(LanguageResources.RoomInvalidName, name));
+            //}
 
             var room = new ChatRoom
             {

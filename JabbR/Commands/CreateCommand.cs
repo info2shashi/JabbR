@@ -19,7 +19,11 @@ namespace JabbR.Commands
                 throw new HubException(LanguageResources.RoomRequired);
             }
 
+            //string roomName = String.Join(" ", args);
+           
+
             string roomName = args[0];
+            
             if (String.IsNullOrWhiteSpace(roomName))
             {
                 throw new HubException(LanguageResources.RoomRequired);
