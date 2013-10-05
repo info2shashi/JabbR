@@ -445,8 +445,6 @@
 
         lobbyLoaded = false;
         
-        // resolve the deferred
-        roomCreationDeferreds[roomName].resolve();
         return true;
     }
 
@@ -2064,6 +2062,9 @@
         setInitialized: function (roomName) {
             var room = roomName ? getRoomElements(roomName) : getCurrentRoomElements();
             room.setInitialized();
+            
+            // resolve the deferred
+            roomCreationDeferreds[roomName].resolve();
         },
         collapseNotifications: function ($notification) {
             // collapse multiple notifications
