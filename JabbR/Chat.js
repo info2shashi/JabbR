@@ -280,6 +280,7 @@
 
     // When the /join command gets raised this is called
     chat.client.joinRoom = function (room) {
+        ui.setRoomLoading(true, room.Name);
         var added = ui.addRoom(room);
 
         ui.setActiveRoom(room.Name);
@@ -293,12 +294,16 @@
 
         if (added) {
             populateRoom(room.Name).done(function () {
+                ui.setRoomLoading(false);
                 ui.addMessage(utility.getLanguageResource('Chat_YouEnteredRoom', room.Name), 'notification', room.Name);
 
                 if (room.Welcome) {
                     ui.addMessage(room.Welcome, 'welcome', room.Name);
                 }
             });
+        }
+        else {
+            ui.setRoomLoading(false);
         }
     };
 
@@ -829,6 +834,7 @@
 
     chat.client.leave = function (user, room) {
         if (isSelf(user)) {
+            ui.setRoomLoading(false);
             ui.setActiveRoom('Lobby');
             ui.removeRoom(room);
         }
