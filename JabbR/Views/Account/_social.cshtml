@@ -10,7 +10,7 @@
                             <ul class="inline">
                                 @if (!Model.IsAlreadyLinked(provider))
                                 {
-                                    <li><a class="btn btn-provider" href="@Url.Content("~/authentication/redirect/" + provider.ToLower() + Html.RequestQuery())"><i class="icon-@provider.ToLower()"></i> @provider</a></li>
+                                    <li><a class="btn btn-provider" href="@Url.Content("~/authentication/redirect/" + provider.ToLower() + Html.RequestQuery())"><i class="icon-@provider.ToLower()"></i>Connect with @provider</a></li>
                                 }
                                 else
                                 {

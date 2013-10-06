@@ -2,20 +2,127 @@
 @using System.Linq;
 @model LoginViewModel
 @{
-    Layout = "_layout.cshtml"; 
+    Layout = "_layout.cshtml";
     var hasSocialProviders = Model.SocialDetails.ConfiguredProviders.Any();
 }
 
 <div class="row-fluid">
-    <div class="span5 @if (!hasSocialProviders) {<text>offset3</text>}">
-        <div class="usernamepassword-auth @if(hasSocialProviders) {<text>auth-divider</text>}">
+    <div class="span5 @if (!hasSocialProviders)
+                      {<text>offset3</text>}">
+        <div class="usernamepassword-auth @if (hasSocialProviders)
+                                          {<text>auth-divider</text>}">
             @Html.Partial("_username", Model)
         </div>
     </div>
+
+
     <div class="span5">
-    <div class="social-auth">
-        @Html.Partial("_social", Model.SocialDetails)
+        <div class="latest">
+            <h1>Latest BTO Projects</h1>
+            <div class="projects">
+                <div class="date">
+                    September 2013
+                </div>
+                <table>
+                    <tr>
+                        <td class="name">Punggol Matilda Edge
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOPG_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Punggol_Matilda_Edge_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Punggol The Verandah
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOPG2_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Punggol_The_Verandah_at_Matilda_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Punggol Waterway View 
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOPG3_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Punggol_Waterway_View_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Yishun Khatib Court
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOYS_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Yishun_Khatib_Court_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Yishun Palm Breeze
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOYS2_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Yishun_Palm_Breeze_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Yishun Saraca Breeze 
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu09p.nsf/0/13SEPBTOYS3_page_6034/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Yishun_Saraca_Breeze_Sep2013">Chatroom</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="projects">
+                <div class="date">
+                    July 2013
+                </div>
+                <table>
+                    <tr>
+                        <td class="name">Yishun Vine Grove
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu07p.nsf/0/13JULBTOYS2_page_8820/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Yishun_Vine_Grove_July2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Yishun Angsana Breeze
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu07p.nsf/0/13JULBTOYS_page_8820/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Yishun_Angsana_Breeze_July2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Sengkang Fernvale Riverwalk
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu07p.nsf/0/13JULBTOSK_page_8820/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Sengkang_Fernvale_Riverwalk_July2013">Chatroom</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="name">Bukit Merah Telok Blangah ParcView
+                        </td>
+                        <td class="hdb"><a href="http://esales.hdb.gov.sg/hdbvsf/eampu07p.nsf/0/13JULBTOBM_page_8820/$file/about0.htm" target="_blank">Info</a> |
+                        </td>
+                        <td class="chatroom"><a href="http://www.btoguru.com/account/register?ReturnUrl=%2F#/rooms/Bukit_Merah_Telok_Blangah_ParcView_July2013">Chatroom</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
+
+    <div class="span5 floatnone">
+        <div class="social-auth">
+            @Html.Partial("_social", Model.SocialDetails)
+        </div>
+
     </div>
+
+    
 </div>

@@ -3,13 +3,13 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>btoguru - from strangers to neighbours</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <meta name="description" content="btoguru is a one-stop chat forum for Singaporeans who are keen to know more about upcoming BTO sales launches, existing BTO projects and meet future neighbours." />
-    
-      @{ 
+    <title>btoguru - Singapore's first BTO forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One-stop BTO forum for Singaporeans who are keen to mingle with future neighbours, know more about upcoming build-to-order sales launches, BTO application procedures and more." />
+    <meta name="keywords" content="singapore bto,build to order,singapore forum,hdb,realtime information,discussion,forum,chat" />
+    @{ 
         WriteLiteral(Bundle.Css()
             .Add("~/Content/bootstrap.min.css")
             .Add("~/Content/bootstrap-responsive.min.css")
@@ -18,13 +18,25 @@
             .Add("~/Content/emoji20.css")
             .Render("~/Content/JabbR_#.css"));
     }
-  </head>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-44616864-1', 'btoguru.com');
+        ga('send', 'pageview');
+    </script>
+</head>
 <body>
     <div class="container">
         <div id="login">
             <div class="login-header">
                 <div class="banner" role="banner">
-                    <h1><b>bto</b>guru - from strangers to neighbours</h1>
+                    <h1><b>bto</b>guru - Everything and anything about your BTO</h1>
                 </div>
             </div>
             <div class="login-body">
@@ -32,34 +44,37 @@
                 @RenderBody()
             </div>
             <div class="slogan">
-                <h2><b>bto</b>guru is a one-stop forum for Singaporeans who are keen in everything there is to know about upcoming sales launches or existing BTO flats. You'll get to meet and engage in realtime chat with future neighbours as well! Sign up today, it's FREE</h2>
+                <h2><b>bto</b>guru is a one-stop forum for Singaporeans who are keen to mingle with future neighbours, find out everything about upcoming build to order sales launches, application procedures and more.. You'll get to engage in realtime chat with neighbours, get expert advice and find great bargains in our marketplace! Sign up today, it's FREE!</h2>
                 <h2>2013 ©</h2>
             </div>
+
         </div>
+
     </div>
+
     <script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")"></script>
     <script type="text/javascript">
-        (function($) {
+        (function ($) {
             $('input.error').closest('.control-group').addClass('error');
 
             $('form').each(function () {
                 var $el = $(this),
                     action = $el.attr('action');
-            
+
                 if (action.indexOf('#') === -1) {
                     $el.attr('action', action + document.location.hash);
                 }
             });
 
-            $('a').each(function() {
+            $('a').each(function () {
                 var $el = $(this),
                     href = $el.attr('href');
-            
+
                 if (href.indexOf('#') === -1) {
                     if ($el.is('.btn-provider')) {
                         href = href + encodeURIComponent(document.location.hash);
                     }
-              
+
                     $el.attr('href', href + document.location.hash);
                 }
             });

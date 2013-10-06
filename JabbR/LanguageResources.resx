@@ -163,7 +163,7 @@
     <value>Register</value>
   </data>
   <data name="Account_RegisterMessage" xml:space="preserve">
-    <value>&lt;a href="{0}"&gt;Register&lt;/a&gt; if you don't have an account.</value>
+    <value>&lt;a href="{0}"&gt;Register an account&lt;/a&gt; within seconds or Facebook login below</value>
   </data>
   <data name="Account_SignIn" xml:space="preserve">
     <value>Sign in</value>
@@ -391,7 +391,7 @@
     <value>Popup Notifications</value>
   </data>
   <data name="Client_RefreshRequiredHeader" xml:space="preserve">
-    <value>JabbR Update</value>
+    <value>btoguru Update</value>
   </data>
   <data name="Client_RefreshRequiredNotification" xml:space="preserve">
     <value>Refresh your browser to get the latest version.  Auto update will take place in 15 seconds.</value>
@@ -400,7 +400,7 @@
     <value>Room commands</value>
   </data>
   <data name="Client_RoomFilterInstruction" xml:space="preserve">
-    <value>Start typing to filter room list...</value>
+    <value>Search for a BTO project..</value>
   </data>
   <data name="Client_Rooms" xml:space="preserve">
     <value>Rooms</value>
@@ -752,7 +752,7 @@
     <value>Grant a user permission to access a private room. Only works if you're an owner of that room.</value>
   </data>
   <data name="Ban_CommandInfo" xml:space="preserve">
-    <value>Ban a user from JabbR!</value>
+    <value>Ban a user from btoguru!</value>
   </data>
   <data name="Broadcast_CommandInfo" xml:space="preserve">
     <value>Send a message to all users in all rooms. Only works if you're an administrator.</value>
@@ -773,7 +773,7 @@
     <value>(plus {0} hidden... click to expand)</value>
   </data>
   <data name="Chat_InitialMessages" xml:space="preserve">
-    <value>Welcome to JabbR
+    <value>Welcome to btoguru
 Use ? or type /? to display the FAQ and list of commands.</value>
   </data>
   <data name="Chat_NoRoomsAvailable" xml:space="preserve">
@@ -974,13 +974,13 @@ Use ? or type /? to display the FAQ and list of commands.</value>
     <value>Status: Connected</value>
   </data>
   <data name="Client_Disconnected" xml:space="preserve">
-    <value>The connection to JabbR has been lost, trying to reconnect.</value>
+    <value>The connection to btoguru has been lost, trying to reconnect.</value>
   </data>
   <data name="Client_OtherRooms" xml:space="preserve">
     <value>Other Rooms</value>
   </data>
   <data name="Client_Reconnecting" xml:space="preserve">
-    <value>The connection to JabbR has been temporarily lost, trying to reconnect.</value>
+    <value>The connection to btoguru has been temporarily lost, trying to reconnect.</value>
   </data>
   <data name="Client_ShortcutLobby" xml:space="preserve">
     <value>Go to the Lobby.</value>
@@ -1037,7 +1037,7 @@ Use ? or type /? to display the FAQ and list of commands.</value>
     <value>Make a room private. Only works if you're the creator of that room.</value>
   </data>
   <data name="Logout_CommandInfo" xml:space="preserve">
-    <value>Log this client out from JabbR and remove browser cookie.</value>
+    <value>Log this client out from btoguru and remove browser cookie.</value>
   </data>
   <data name="Me_CommandInfo" xml:space="preserve">
     <value>Type /me 'does anything'. Sends a message to everyone in the room.</value>

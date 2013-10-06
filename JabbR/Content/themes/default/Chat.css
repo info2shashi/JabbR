@@ -2327,7 +2327,7 @@ li.clearfix {
     background-color: #FFF;
     border: 1px solid #e5e5e5;
     margin: 100px auto;
-    width: 500px;
+    width: 620px;
 }
 
 .login-header, .account-details-header {
@@ -2462,12 +2462,12 @@ li.clearfix {
     }
 
 .social-auth {
-    margin: 20px 15px;
-    padding: 0 20px;
+    /*margin: 20px 15px;
+    padding: 0 20px;*/ 
 }
 
     .social-auth .btn-provider {
-        font-size: 17.5px;
+        font-size: 14px;
         width: 220px;
         padding: 6px 0;
         margin-left: 15px;
@@ -2486,7 +2486,7 @@ li.clearfix {
     .social-auth [class*=" icon-"] {
         display: inline-block;
         width: 45px;
-        margin-left: 42px;
+        margin-left: 7px;
     }
 
 .icon-link {
@@ -2516,7 +2516,7 @@ li.clearfix {
 }
 
 .social-auth .btn-provider {
-    margin-left: 15px;
+    margin-left: 0;
 }
 
 .provider {
@@ -2549,14 +2549,14 @@ li.clearfix {
 }
 
 .login-body .auth-divider {
-    border-right: 1px solid #ccc;
+    /*border-right: 1px solid #ccc;*/
 }
 
 .modal .btn-primary,
 .login-body .btn,
 .account-details .btn,
 .administration .btn {
-    background-color: #00103F;
+    background-color: #164C85;
     background-image: none;
     text-shadow: none;
     color: #FFF;
@@ -2566,7 +2566,7 @@ li.clearfix {
     .login-body .btn:hover,
     .account-details .btn:hover,
     .administration .btn:hover {
-        background-color: #164C85;
+        background-color: #185ca4;
     }
 
 .large-logo {

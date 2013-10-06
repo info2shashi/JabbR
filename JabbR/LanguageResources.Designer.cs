@@ -214,7 +214,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;a href=&quot;{0}&quot;&gt;Register&lt;/a&gt; if you don&apos;t have an account..
+        ///   Looks up a localized string similar to &lt;a href=&quot;{0}&quot;&gt;Register an account&lt;/a&gt; within seconds or Facebook login below.
         /// </summary>
         public static string Account_RegisterMessage {
             get {
@@ -748,7 +748,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ban a user from JabbR!.
+        ///   Looks up a localized string similar to Ban a user from btoguru!.
         /// </summary>
         public static string Ban_CommandInfo {
             get {
@@ -829,7 +829,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to JabbR
+        ///   Looks up a localized string similar to Welcome to btoguru
         ///Use ? or type /? to display the FAQ and list of commands..
         /// </summary>
         public static string Chat_InitialMessages {
@@ -1532,7 +1532,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The connection to JabbR has been lost, trying to reconnect..
+        ///   Looks up a localized string similar to The connection to btoguru has been lost, trying to reconnect..
         /// </summary>
         public static string Client_Disconnected {
             get {
@@ -1742,7 +1742,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The connection to JabbR has been temporarily lost, trying to reconnect..
+        ///   Looks up a localized string similar to The connection to btoguru has been temporarily lost, trying to reconnect..
         /// </summary>
         public static string Client_Reconnecting {
             get {
@@ -1751,7 +1751,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JabbR Update.
+        ///   Looks up a localized string similar to btoguru Update.
         /// </summary>
         public static string Client_RefreshRequiredHeader {
             get {
@@ -1778,7 +1778,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start typing to filter room list....
+        ///   Looks up a localized string similar to Search for a BTO project...
         /// </summary>
         public static string Client_RoomFilterInstruction {
             get {
@@ -2363,7 +2363,7 @@ namespace JabbR {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log this client out from JabbR and remove browser cookie..
+        ///   Looks up a localized string similar to Log this client out from btoguru and remove browser cookie..
         /// </summary>
         public static string Logout_CommandInfo {
             get {
