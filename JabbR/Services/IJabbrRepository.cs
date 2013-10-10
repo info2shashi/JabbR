@@ -19,6 +19,7 @@ namespace JabbR.Services
         IQueryable<ChatMessage> GetPreviousMessages(string messageId);
         IQueryable<ChatRoom> GetAllowedRooms(ChatUser user);
         IQueryable<Notification> GetNotificationsByUser(ChatUser user);
+        IQueryable<RoomImages> GetRoomImagesByRoomName(string roomName);
         ChatMessage GetMessageById(string id);
 
         ChatUser GetUserById(string userId);

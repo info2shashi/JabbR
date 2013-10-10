@@ -440,7 +440,7 @@ namespace JabbR
             // Get online users through the repository
             List<ChatUser> onlineUsers = await _repository.GetOnlineUsers(room).ToListAsync();
 
-            return new RoomViewModel
+            var roomViewModel= new RoomViewModel
             {
                 Name = room.Name,
                 Users = from u in onlineUsers
@@ -452,6 +452,21 @@ namespace JabbR
                 Welcome = room.Welcome ?? String.Empty,
                 Closed = room.Closed
             };
+
+            if (room.RoomImages != null && room.RoomImages.Count > 0)
+            {
+                roomViewModel.RoomImagesVM = room.RoomImages.Select(img => new RoomImagesViewModel(img));
+            }
+            else
+            {
+                var roomImages = _repository.GetRoomImagesByRoomName(room.Name);
+                if (roomImages != null && roomImages.Count() > 0)
+                {
+                    roomViewModel.RoomImagesVM = roomImages.Select(img => new RoomImagesViewModel(img));
+                }
+            }
+
+            return roomViewModel;
         }
 
         public void PostNotification(ClientNotification notification)
@@ -1128,8 +1143,22 @@ namespace JabbR
                 Private = room.Private,
                 Closed = room.Closed,
                 Topic = room.Topic ?? String.Empty,
-                Count = _repository.GetOnlineUsers(room).Count()
+                Count = _repository.GetOnlineUsers(room).Count(),
+                RoomImagesVM = new List<RoomImagesViewModel>()
             };
+
+            if (room.RoomImages != null && room.RoomImages.Count >0)
+            {
+                roomViewModel.RoomImagesVM = room.RoomImages.Select(img => new RoomImagesViewModel(img));
+            }
+            else
+            {
+                var roomImages = _repository.GetRoomImagesByRoomName(room.Name);
+                if (roomImages != null && roomImages.Count() > 0)
+                {
+                    roomViewModel.RoomImagesVM = roomImages.Select(img => new RoomImagesViewModel(img));
+                }
+            }
 
             // notify all clients who can see the room
             if (!room.Private)

@@ -1030,10 +1030,12 @@
     <Compile Include="Models\ChatUserPreferences.cs" />
     <Compile Include="Models\Mapping\AttachmentMap.cs" />
     <Compile Include="Models\Mapping\NotificationMap.cs" />
+    <Compile Include="Models\Mapping\RoomImagesMap.cs" />
     <Compile Include="Models\MessageType.cs" />
     <Compile Include="Models\ModelExtensions.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Infrastructure\QueryableExtensions.cs" />
+    <Compile Include="Models\RoomImages.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Nancy\AdministrationModule.cs" />
     <Compile Include="Nancy\ClaimsPrincipalUserIdentity.cs" />
@@ -1125,6 +1127,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\ProfilePageViewModel.cs" />
+    <Compile Include="ViewModels\RoomImagesViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SocialLoginViewModel.cs" />
     <Compile Include="WebApi\Model\ErrorModel.cs" />

@@ -155,6 +155,11 @@ namespace JabbR.Services
                                     .Where(n => n.UserKey == user.Key);
         }
 
+        public IQueryable<RoomImages> GetRoomImagesByRoomName(string roomName)
+        {
+            return _db.RoomImages.Include(r => r.Room).Where(r => r.Room.Name == roomName);
+        }
+
         private IQueryable<ChatMessage> GetMessagesByRoom(string roomName)
         {
             return _db.Messages.Include(r => r.Room).Where(r => r.Room.Name == roomName);
