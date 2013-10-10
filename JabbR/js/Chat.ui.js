@@ -11,7 +11,6 @@
 
     var $chatArea = null,
         $tabs = null,
-        $roomImages = [],
         $submitButton = null,
         $newMessage = null,
         $roomActions = null,
@@ -67,6 +66,7 @@
         connectionInfoStatus = null,
         connectionInfoTransport = null,
         $topicBar = null,
+        $roomImagesBar = null,
         $loadingHistoryIndicator = null,
         trimRoomHistoryFrequency = 1000 * 60 * 2, // 2 minutes in ms
         $loadMoreRooms = null,
@@ -344,31 +344,7 @@
 
         return nextListElement;
     }
-
-    function UpdateRoomImages(roomName) {
-        $('#room-images').empty();
-
-        if ($roomImages != null && $roomImages.length > 0) {
-            var counter = 0;
-            var htmlString = '';
-            $.each($roomImages, function () {
-                if (this.roomName === roomName) {
-                   
-                    htmlString += '<a class="example-image-link" href="' + this.photourl + '" data-lightbox="example-' + counter + '"><img  class="example-image" src="' + this.thumbnail + '" alt="' + this.comment + '"/></a>'
-                        
-                }
-            });
-            if (htmlString.length > 0)
-                {
-            $('#room-images').prepend('	<div class="image-row"><div class="image-set"> ' + htmlString + '</div></div> ');
-            $('#room-images').show();
-            }
-        }
-        else {
-            $('#room-images').hide();
-        }
-    }
-
+    
     function filterIndividualRoom($room) {
         var filter = $roomFilterInput.val().toUpperCase(),
             showClosedRooms = $closedRoomFilter.is(':checked');
@@ -706,6 +682,10 @@
 
         roomTopic.html(topicHtml);
 
+        var elem = document.createElement("img");
+        elem.setAttribute("src", "https://secure.gravatar.com/avatar/${hash}?s=16&d=mm");
+        elem.setAttribute("alt", "Flower");
+        $roomImagesBar.appendChild("elem");
         if (isVisibleRoom) {
             roomTopic.fadeIn(2000);
         }
@@ -839,6 +819,7 @@
             connectionInfoStatus = '#connection-status';
             connectionInfoTransport = '#connection-transport';
             $topicBar = $('#topic-bar');
+            $roomImagesBar = $('#roomImgages');
             $loadingHistoryIndicator = $('#loadingRoomHistory');
 
             $loadMoreRooms = $('#load-more-rooms-item');
@@ -1373,28 +1354,8 @@
                  .data('owner', false);
             room.updateUserStatus($user);
         },
-
-        loadImagesForActiveRoom : function(roomName){
-            UpdateRoomImages(roomName);
-        },
-
         setActiveRoom: navigateToRoom,
         setActiveRoomCore: function (roomName) {
-
-            //$('#room-images').empty();
-            //if ($roomImages != null && $roomImages.length > 0) {
-            //    $.each($roomImages, function () {
-            //        if (this.roomName === roomName) {
-            //            $('#room-images').prepend('<img src="' + this.path + '" />');
-            //        }
-            //    });
-            //    $('#room-images').show();
-            //}
-            //else
-            //{
-            //    $('#room-images').hide();
-            //}
-            UpdateRoomImages(roomName);
             var room = getRoomElements(roomName);
 
             loadRoomPreferences(roomName);
@@ -2035,11 +1996,6 @@
 
             return $element;
         },
-
-        addRoomImage: function (roomimage){
-            $roomImages.push(roomimage);
-        },
-
         appendMessage: function (newMessage, room) {
             // Determine if we need to show a new date header: Two conditions
             // for instantly skipping are if this message is a date header, or

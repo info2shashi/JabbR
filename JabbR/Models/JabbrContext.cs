@@ -37,6 +37,8 @@ namespace JabbR.Models
 
             modelBuilder.Configurations.Add(new NotificationMap());
 
+            modelBuilder.Configurations.Add(new RoomImagesMap());
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -47,6 +49,7 @@ namespace JabbR.Models
         public DbSet<ChatUserIdentity> Identities { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<RoomImages> RoomImages { get; set; }
         public DbSet<Settings> Settings { get; set; }
     }
 }

@@ -56,6 +56,7 @@ namespace JabbR.Models
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
 
+        public virtual ICollection<RoomImages> RoomImages { get; set; }
         // Private rooms this user is allowed to go into
         public virtual ICollection<ChatRoom> AllowedRooms { get; set; }
 

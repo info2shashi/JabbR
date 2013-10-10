@@ -17,6 +17,7 @@
     @{ 
         WriteLiteral(Bundle.Css().ForceDebugIf(() => Model.DebugMode)
             .Add("~/Content/bootstrap.min.css")
+            .Add("~/Content/lightbox.css")
             .Add("~/Content/bootstrap-responsive.min.css")
             .Add("~/Content/font-awesome.min.css")
             .Add("~/Content/themes/default/Chat.css")
@@ -325,6 +326,9 @@
                 </ul>
             </div>
         </div>
+        <div id="room-images">
+
+        </div>
         <div id="chat-area" role="tabpanel">
             <div id="room-loading">
                 <i class="icon-spinner icon-3x"> </i><h3>@LanguageResources.LoadingMessage</h3>
@@ -472,6 +476,7 @@
             .Add("~/Scripts/jquery.pulse.min.js")
             .Add("~/Scripts/jquery.KeyTips.js")
             .Add("~/Scripts/jquery.signalR-2.1.0-pre-130916-b211.min.js")
+            .Add("~/Scripts/lightbox-2.6.min.js")
             .Render("~/Scripts/JabbR1_#.js"));
     }
     <script type="text/javascript" src="@Url.Content("~/signalr/hubs")"></script>

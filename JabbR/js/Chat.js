@@ -136,15 +136,7 @@
             ui.addChatMessage(viewModel, room);
         });
 
-        if (roomInfo.RoomImagesVM != null && roomInfo.RoomImagesVM.length > 0){
-        $.each(roomInfo.RoomImagesVM, function () {
-            var vm = getRoomImageVM(this, room);
-            ui.addRoomImage(vm);
-        });
-        }
-
         ui.changeRoomTopic(roomInfo.Name, roomInfo.Topic);
-
         // mark room as initialized to differentiate messages
         // that are added after initial population
         ui.setInitialized(room);
@@ -156,16 +148,6 @@
         ui.watchMessageScroll(messageIds, room);
     }
     
-    function getRoomImageVM(roomImage, roomName)
-    {
-        return {
-            roomName: roomName,
-            thumbnail: roomImage.ImageSource,
-            photourl: roomImage.BigImageSource,
-            comment: roomImage.Comment
-        };
-    }
-
     function populateLobbyRooms() {
         var d = $.Deferred();
         
@@ -370,7 +352,6 @@
                 loadCommands();
                 populateLobbyRooms();
                 loadRooms();
-                ui.loadImagesForActiveRoom(this.state.activeRoom);
             });
         }
         else {

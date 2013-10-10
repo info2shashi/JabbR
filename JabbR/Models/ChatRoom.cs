@@ -37,6 +37,7 @@ namespace JabbR.Models
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
 
+        public virtual ICollection<RoomImages> RoomImages { get; set; }
         public ChatRoom()
         {
             Owners = new SafeCollection<ChatUser>();
