@@ -1,4 +1,4 @@
-﻿/// <reference path="Scripts/jquery-2.0.3.js" />
+/// <reference path="Scripts/jquery-2.0.3.js" />
 /// <reference path="Scripts/jQuery.tmpl.js" />
 /// <reference path="Scripts/jquery.cookie.js" />
 /// <reference path="Chat.toast.js" />
@@ -12,9 +12,13 @@
     var $chatArea = null,
         $tabs = null,
         $roomImages = [],
+        $roomMaps = [],
         $submitButton = null,
         $newMessage = null,
         $roomActions = null,
+        $roomLat = null,
+        $roomLng = null,
+        $divMap = null,
         $toast = null,
         $disconnectDialog = null,
         $downloadIcon = null,
@@ -89,6 +93,9 @@
 
         var parts = hash.split('/');
         if (parts[0] === 'rooms') {
+            //var t_name = parts[1];
+            //t_name = t_name.replace(/\ /g, '_');
+            //return t_name;
             return parts[1];
         }
 
@@ -126,7 +133,20 @@
     }
 
     function populateLobbyRoomList(item, template, listToPopulate) {
+        //$.each(item,
+        //    function () {
+        //        var t_name = this.Name.replace(/\_/g, ' ');
+        //        this.Name = t_name;
+        //    }
+        //    );
         $.tmpl(template, item).appendTo(listToPopulate);
+
+        //    $.each(item,
+        //function () {
+        //    var t_name = this.Name.replace(/\ /g, '_');
+        //    this.Name = t_name;
+        //}
+        //);
     }
 
     function sortRoomList(listToSort) {
@@ -156,6 +176,7 @@
                         $('#userlist-' + roomId + '-active'),
                         $('#messages-' + roomId),
                         $('#roomTopic-' + roomId));
+
         return room;
     }
 
@@ -197,6 +218,7 @@
     }
 
     function updateLobbyRoom(room) {
+        //room.Name = room.Name.replace(/\ /g, '_');
         var lobby = getLobby(),
             $targetList = room.Private === true ? lobby.owners : lobby.users,
             $room = $targetList.find('[data-room="' + room.Name + '"]'),
@@ -235,6 +257,24 @@
 
         var nextListElement = getNextRoomListElement($targetList, roomName, room.Count, room.Closed);
 
+        //var t_name = '';
+        //if (roomName.indexOf('_') > 0)
+        //{
+        //    t_name = roomName.replace(/\_/g, ' ');
+        //}
+        //else
+        //{
+        //    t_name = roomName.replace(/\ /g, '_');
+        //}
+
+        //$room.data('count', room.Count);
+        //if (nextListElement !== null) {
+        //    $room.data('Name', t_name).insertBefore(nextListElement);
+        //} else {
+        //    $room.data('Name', t_name).appendTo($targetList);
+        //}
+        //$room.data('Name', roomName);
+
         $room.data('count', room.Count);
         if (nextListElement !== null) {
             $room.insertBefore(nextListElement);
@@ -258,15 +298,21 @@
 
         roomViewModel.processedTopic = ui.processContent(roomViewModel.Topic);
         $room = templates.lobbyroom.tmpl(roomViewModel);
-
         var nextListElement = getNextRoomListElement($targetList, roomName, count, closed);
-
+ 
         if (nextListElement !== null) {
             $room.insertBefore(nextListElement);
-        } else {
+        }
+        else
+        {
             $room.appendTo($targetList);
         }
-
+        //var t_name = roomName.replace(/\_/g, ' ');
+        //if (nextListElement !== null) {
+        //    $room.data('Name', t_name).insertBefore(nextListElement);
+        //} else {
+        //    $room.data('Name', t_name).appendTo($targetList);
+        //}
         filterIndividualRoom($room);
         lobby.setListState($targetList);
         
@@ -303,7 +349,7 @@
     
     function getNextRoomListElement($targetList, roomName, count, closed) {
         var nextListElement = null;
-
+        
         // move the item to before the next element
         $targetList.find('li').each(function () {
             var $this = $(this),
@@ -315,7 +361,7 @@
             if (name === undefined) {
                 return true;
             }
-
+            // var t_Name = name.replace(/\ /g, '_');
             nameComparison = name.toString().toUpperCase().localeCompare(roomName);
 
             // skip this element
@@ -345,27 +391,73 @@
         return nextListElement;
     }
 
+    function SortById(a,b)
+    {
+        return ((a.id < b.id) ? -1 : ((a.id > b.id) ? 1 : 0));
+    }
+
+    function UpdateRoomMap(roomName)
+    {
+        //debugger;
+        $roomLat = "0";
+        $roomLng = "0";
+        var isfound = false;
+        $roomMaps = $.unique($roomMaps);
+        if ($roomMaps != null && $roomMaps.length > 0) {
+            var counter = 0;
+            var sortedArray = $roomMaps.sort(SortById);
+            $.each(sortedArray, function () {
+                if (this.roomName === roomName) {
+                    $roomLat = this.lat;
+                    $roomLng = this.lng;
+                    isfound = true;
+                }
+            });
+            if (isfound) {
+                $("#bt-map").show();
+                $("#bt-map").css("display", "block");
+            } else {
+                $("#bt-map").hide();
+                $("#bt-map").css("display","none");
+            }
+        }
+        else {
+            $("#bt-map").hide();
+            $("#bt-map").css("display", "none");
+        }
+    }
+
     function UpdateRoomImages(roomName) {
         $('#room-images').empty();
-
+        $roomImages = $.unique($roomImages);
         if ($roomImages != null && $roomImages.length > 0) {
             var counter = 0;
             var htmlString = '';
-            $.each($roomImages, function () {
+            var sortedArray =  $roomImages.sort(SortById);
+            $.each(sortedArray, function () {
                 if (this.roomName === roomName) {
-                   
-                    htmlString += '<a class="example-image-link" href="' + this.photourl + '" data-lightbox="example-' + counter + '"><img  class="example-image" src="' + this.thumbnail + '" alt="' + this.comment + '"/></a>'
-                        
+                    //debugger;
+                    //htmlString += '<a class="example-image-link" href="' + this.photourl + '" data-lightbox="example-' + counter + '"><img  class="example-image" src="' + this.thumbnail + '" alt="' + this.comment + '"  style=height:50px;margin:2px;" /></a>'
+                    htmlString += '<a href="' + this.photourl + '" class="html5lightbox" data-group="set1" title="' + this.comment + '"><img  src="' + this.thumbnail + '" title="' + this.comment + '"  style=height:50px;margin:3px;border-radius:2px;" /></a>';
+                   // htmlString += '<li><a href="' + this.thumbnail + '" rel="prettyPhoto[mixed]" title="' + this.comment + '"><img  src="' + this.photourl + '" title="' + this.comment + '"  style=height:50px;margin:2px;" /></a></li>';
                 }
             });
             if (htmlString.length > 0)
-                {
-            $('#room-images').prepend('	<div class="image-row"><div class="image-set"> ' + htmlString + '</div></div> ');
-            $('#room-images').show();
+            {
+                $('#room-images').prepend('	<div class="image-row"><div class="image-set"> ' + htmlString + '</div></div> ');
+                //$.each($(".html5lightbox"), function () { this.html5lightbox(); })
+                $(".html5lightbox").html5lightbox();
+
+                $('#chat-area').css("top", '89px');
+                $('#room-images').show();
+            } else {
+                $('#room-images').hide();
+                $('#chat-area').css("top", '30px');
             }
         }
         else {
             $('#room-images').hide();
+            $('#chat-area').css("top", '32px');
         }
     }
 
@@ -400,18 +492,23 @@
 
         roomId = getRoomId(roomName);
 
+        var t_Name = roomName.replace(/\_/g, ' ');
         // Add the tab
         viewModel = {
             id: roomId,
             name: roomName,
+            roomname: t_Name,
             closed: roomViewModel.Closed
         };
 
         if (!roomCache[roomName.toString().toUpperCase()]) {
             addRoomToLobby(roomViewModel);
         }
+
+        templates.tab.tmpl(viewModel).data('name', t_Name).appendTo($tabsDropdown);
+        templates.tab.tmpl(viewModel).data('name', roomName);
+        //templates.tab.tmpl(viewModel).data('roomname', t_Name).appendTo($tabsDropdown);
         
-        templates.tab.tmpl(viewModel).data('name', roomName).appendTo($tabsDropdown);
         ui.updateTabOverflow();
 
         $messages = $('<ul/>').attr('id', 'messages-' + roomId)
@@ -462,6 +559,8 @@
         $messages.data('scrollHandler', scrollHandler);
 
         setAccessKeys();
+
+        //navigateToRoom(roomName);
 
         lobbyLoaded = false;
         return true;
@@ -696,7 +795,9 @@
 
     function updateRoomTopic(roomName, topic) {
         var room = getRoomElements(roomName);
+        
         var topicHtml = topic === '' ? utility.getLanguageResource('Chat_DefaultTopic', roomName) : ui.processContent(topic);
+        var t_Name = topicHtml.replace(/\_/g, ' ');
         var roomTopic = room.roomTopic;
         var isVisibleRoom = getCurrentRoomElements().getName() === roomName;
 
@@ -704,7 +805,7 @@
             roomTopic.hide();
         }
 
-        roomTopic.html(topicHtml);
+        roomTopic.html(t_Name);
 
         if (isVisibleRoom) {
             roomTopic.fadeIn(2000);
@@ -741,6 +842,13 @@
         };
         return options;
     }
+
+    function setGA(n) {
+        document.title = n;
+        var nunderscore = n.replace(/ /g,"_");
+        ga('send', 'pageview', { 'page': nunderscore });
+    }
+    
 
     function loadMoreLobbyRooms() {
         var lobby = getLobby(),
@@ -790,6 +898,7 @@
             $submitButton = $('#send');
             $newMessage = $('#new-message');
             $roomActions = $('#room-actions');
+            $divMap = $("#bt-map");
             $toast = $('#room-preferences .toast');
             $sound = $('#room-preferences .sound');
             $richness = $('#room-preferences .richness');
@@ -859,6 +968,14 @@
                 $toast.hide();
             }
 
+
+            $("#btViewMap").click(function ()
+            {
+                var url = $("#mapPageUrl").html();
+                window.open(url + "/showmap/" + $roomLat.replace('.', 'DOT') + ";" + $roomLng.replace('.', 'DOT'), '_blank');
+            }
+            );
+
             // DOM events
             $document.on('click', 'h3.collapsible_title', function () {
                 var nearEnd = ui.isNearTheEnd();
@@ -883,6 +1000,7 @@
             
             $document.on('click', 'li.room .room-row', function () {
                 var roomName = $(this).parent().data('name');
+                setGA(roomName);
                 activateOrOpenRoom(roomName);
             });
             
@@ -902,6 +1020,7 @@
             
             $document.on('click', '#tabs li, #tabs-dropdown li', function () {
                 var roomName = $(this).data('name');
+                setGA(roomName);
                 activateOrOpenRoom(roomName);
             });
 
@@ -1214,10 +1333,10 @@
             $window.focus(function () {
                 // clear unread count in active room
                 var room = getCurrentRoomElements();
+                
                 room.makeActive();
 
                 ui.updateTabOverflow();
-
                 triggerFocus();
             });
 
@@ -1376,6 +1495,12 @@
 
         loadImagesForActiveRoom : function(roomName){
             UpdateRoomImages(roomName);
+            UpdateRoomMap(roomName);
+        },
+
+        
+        loadMapForActiveRoom : function(){
+            UpdateRoomMap(roomName);
         },
 
         setActiveRoom: navigateToRoom,
@@ -1395,6 +1520,8 @@
             //    $('#room-images').hide();
             //}
             UpdateRoomImages(roomName);
+            UpdateRoomMap(roomName);
+            //UpdateRoomMap();
             var room = getRoomElements(roomName);
 
             loadRoomPreferences(roomName);
@@ -1413,15 +1540,17 @@
                     if (currentRoom.isLobby()) {
                         $lobbyRoomFilterForm.hide();
                         $roomActions.show();
+                       // $divMap.show();
                     }
                 }
-
+                
                 room.makeActive();
                 
                 ui.updateTabOverflow();
 
                 if (room.isLobby()) {
                     $roomActions.hide();
+                   // $divMap.hide();
                     $lobbyRoomFilterForm.show();
 
                     room.messages.hide();
@@ -1517,6 +1646,7 @@
                 
                 // Process the topics
                 for (i = 0; i < rooms.length; ++i) {
+                    
                     rooms[i].processedTopic = ui.processContent(rooms[i].Topic);
                 }
                 
@@ -2019,6 +2149,9 @@
             return $element;
         },
         addMessage: function (content, type, roomName) {
+            if(roomName != undefined){
+                roomName = roomName.replace(/\ /g, '_');
+            }
             var room = roomName ? getRoomElements(roomName) : getCurrentRoomElements(),
                 nearEnd = room.isNearTheEnd(),
                 $element = ui.prepareNotificationMessage(content, type);
@@ -2036,10 +2169,47 @@
             return $element;
         },
 
-        addRoomImage: function (roomimage){
-            $roomImages.push(roomimage);
+        clearRoomImage: function (roomimage){
+            // $roomImages = [];
+        },
+        addRoomImage: function (roomimage) {
+            var added=false;
+            $.map($roomImages, function (elementOfArray, indexInArray) {
+                if (elementOfArray.roomName == roomimage.roomName && elementOfArray.photourl == roomimage.photourl && elementOfArray.thumbnail == roomimage.thumbnail) {
+                    added = true;
+                }
+            });
+            if (!added) {
+                $roomImages.push(roomimage);
+            }
         },
 
+        resetMap : function(){
+            //$roomLat = 0;
+            //$roomLng = 0;
+            //$roomMaps = [];
+            //$divMap.hide();
+        },
+
+        updateMap: function (roomMap) {
+            //debugger;
+            //$roomLat = roomMap.lat;
+            //$roomLng = roomMap.lng;
+
+            var added = false;
+            $.map($roomMaps, function (elementOfArray, indexInArray) {
+                if (elementOfArray.roomName == roomMap.roomName && elementOfArray.lat == roomMap.lat && elementOfArray.lng == roomMap.lng) {
+                    added = true;
+                }
+            });
+            if (!added) {
+                $roomMaps.push(roomMap);
+            }
+
+            //if ($roomLat != 0 && $roomlng != 0)
+            //    $divMap.show();
+
+        },
         appendMessage: function (newMessage, room) {
             // Determine if we need to show a new date header: Two conditions
             // for instantly skipping are if this message is a date header, or
@@ -2106,6 +2276,10 @@
         setInitialized: function (roomName) {
             var room = roomName ? getRoomElements(roomName) : getCurrentRoomElements();
             room.setInitialized();
+        },
+        setName: function (roomName) {
+            var room = roomName ? getRoomElements(roomName) : getCurrentRoomElements();
+            room.data('name', roomName.replace(/\_/g, ' '));
         },
         collapseNotifications: function ($notification) {
             // collapse multiple notifications
